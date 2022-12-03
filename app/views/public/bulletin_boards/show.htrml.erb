@@ -1,0 +1,9 @@
+<%= @bulletin_board.title %>
+<%= @bulletin_board.content %>
+
+<% if @bulletin_board = current.bulletin_board %>
+  <%= link_to "編集する", edit_bulletin_board_path(@bulletin_board) %>
+<% end %>
+
+コメント一覧
+コメントする

@@ -1,0 +1,5 @@
+<% @bulletin_boards.each do |bulletin_board| %>
+  <%= link_to bulletin_boards.title, bulletin_board_path(bulletin_board.id) %>
+  <%= bulletin_boards.content %>
+<% end %>
+ <%= paginate @bulletin_boards %>
