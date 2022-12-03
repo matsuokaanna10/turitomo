@@ -9,5 +9,7 @@ Rails.application.routes.draw do
     #post 'guest_sign_in', to: 'sessions#guest_sign_in'
    resources :users, only: [:show, :edit, :update]
    resources :bulletin_boards, only: [:new, :index, :show, :create, :edit, :update]
+   resources :comments, only: [:new, :create]
+   resources :recruitments, only: [:new, :show, :edit, :create, :update]
   end
 end

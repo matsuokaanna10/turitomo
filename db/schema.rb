@@ -10,13 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_29_124440) do
+ActiveRecord::Schema.define(version: 2022_12_03_150202) do
 
   create_table "bulletin_boards", force: :cascade do |t|
     t.integer "user_id"
-    t.string "image"
     t.string "title"
     t.text "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "bulletin_board_id"
+    t.text "sentence"
+    t.string "image"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "recruitments", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "bulletin_board_id"
+    t.string "title"
+    t.text "overview"
+    t.string "image"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

@@ -1,0 +1,8 @@
+変更
+<%= form_with model:@recruitment, local:true do |f| %>
+  タイトル
+  <%= f.text_field :title %>
+  内容
+  <%= f.text_area :overview %>
+  <%= f.submit '変更する' %>
+<% end %>

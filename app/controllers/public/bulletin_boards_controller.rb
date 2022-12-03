@@ -23,6 +23,15 @@ class BulletinBoardsController < ApplicationController
   end
   
   def update
+    @bulletin_board = BulletinBoard.find(params[:id])
+    @bulletin_board.update(bulletin_board_params)
+    redirect_to bulletin_boardpath(@bulletin_board.id)
+  end
+  
+  def destroy
+    bulletin_board = BulletinBoard.find(params[:id])
+    bulletin_board.destroy
+    redirect_to bulletin_board_path(bulletin_board.id)
   end
   
   private

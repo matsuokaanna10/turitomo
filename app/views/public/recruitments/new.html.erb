@@ -1,0 +1,8 @@
+募集
+<%= form_with model:@recruitment, local:true do |f| %>
+　題名
+  <%= f.text_area :title %>
+  概要
+  <%= f.text_area :overview %>
+  <%= f.submit '募集する' %>
+<% end %>

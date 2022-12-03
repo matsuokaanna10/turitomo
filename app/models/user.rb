@@ -10,4 +10,6 @@ class User < ApplicationRecord
       
   #end
   has_many :bulletin_boards, dependent: :destroy
+  has_many :comments, dependent: :destroy
+  has_many :recruitments, dependent: :destroy
 end

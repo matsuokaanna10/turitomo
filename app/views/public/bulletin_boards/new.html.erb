@@ -1,8 +1,8 @@
-投稿
+掲示板作成
 <%= form_with model:@bulletin_board, local:true do |f| %>
   タイトル
   <%= f.text_field :title %>
   内容
   <%= f.text_area :content %>
-  <%= f.submit '投稿' %>
+  <%= f.submit '掲示板を作成する' %>
 <% end %>

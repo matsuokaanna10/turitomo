@@ -3,6 +3,7 @@
 
 <% if @bulletin_board = current.bulletin_board %>
   <%= link_to "編集する", edit_bulletin_board_path(@bulletin_board) %>
+  <%= link_to "削除", bulletin_board_path(@bulletin_board), method: :delete %>
 <% end %>
 
 コメント一覧
