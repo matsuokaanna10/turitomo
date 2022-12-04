@@ -1,12 +1,30 @@
 <h1>マイページ</h1>
 <%= @user.name %>
+<%= image_tag @user.image.to_s %>
 <%= @user.sex %>
 <%= @user.age %>
-<%= link_to "編集する", edit_user_path %>
+<% if @user = current_user %>
+  <%= link_to "編集する", edit_user_path %>
+<% end %>
 
-フォロー
-フォロワー
-いいね
-作成した掲示板
+投稿一覧
+<% @bulletin_boards.each do |bulletin_board| %>
+  <%= image_tag bulletin_board.user.image.to_s %>
+  <%= bulletin_board.title %>
+  <%= bulletin_board.content %>
+<% end %>
 
-右側に↑の押したやつ一覧が出るようにする
+いいね一覧
+<% @user.liked_bulletin_boards.each do |bulletin_board| %>
+  <%= image_tag bulletin_board.user.image.to_s %>
+  <%= bulletin_board.title %>
+<% end %>
+
+  <% if current_user.following?(user) %>
+    <%= link_to "フォロー外す", user_relationships_path(user.id), method: :delete %>
+  <% else %>
+    <%= link_to "フォローする", user_relationships_path(user.id), method: :post %>
+  <% end %>
+  
+<%= @user.followings.count %>
+<%= @user.followers.count %>

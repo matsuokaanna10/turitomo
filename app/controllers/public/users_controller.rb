@@ -1,6 +1,7 @@
 class Public::UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
+    @bulletin_boards = current.bulletin_board.all
   end
   
   def edit

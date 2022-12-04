@@ -4,12 +4,14 @@ class BulletinBoardsController < ApplicationController
   end
   
   def index
-    @bulletin_boards = BulletinBoard.all.page(params[:page]).per(10)
+    @bulletin_boards = BulletinBoard.all
+    @comments = Comment.all
   end
   
   def show
     @bulletin_board = BulletinBoard.find(params[:id])
     @user = @bulletin_board.user.all
+    @like = Like.new
   end
   
   def create
