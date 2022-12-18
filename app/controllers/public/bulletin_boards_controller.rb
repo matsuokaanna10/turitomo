@@ -1,4 +1,4 @@
-class BulletinBoardsController < ApplicationController
+class Public::BulletinBoardsController < ApplicationController
   def new
     @bulletin_board = BulletinBoard.new
   end
@@ -17,7 +17,7 @@ class BulletinBoardsController < ApplicationController
   def create
     bulletin_board = BulletinBoard.new(bulletin_board_params)
     bulletin_board.save
-    redirect_to bulletin_board_path(bulletin_board.id)
+    redirect_to user_path(current_user.id)
   end
   
   def edit

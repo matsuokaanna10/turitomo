@@ -8,11 +8,14 @@
   <%= f.label :"プローフィール" %>
   <%= f.text_area :introduction %>
   
-  <%= f.label :"性別" %>
-  <%= f.text_field :sex %>
+  <div class="sex-field">
+    <%= f.label :"性別" %><br />
+    <%= f.label :man  %>
+    <%= f.radio_button :sex, :man %>
+    <%= f.label :woman  %>
+    <%= f.radio_button :sex, :woman %>
+  </div>
   
-  <%= f.label :"年齢" %>
-  <%= f.text_field :age %>
-  
+  <%= f.submit '変更する' %>
   
 <% end %>

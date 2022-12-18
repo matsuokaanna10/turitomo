@@ -11,6 +11,10 @@
   </head>
 
   <body>
+    <% if user_signed_in? %>
+      <%= link_to "マイページ", user_path(current_user.id) %>
+      <%= link_to "掲示板一覧", bulletin_boards_path %>
+    <% end %>
     <%= yield %>
   </body>
 </html>

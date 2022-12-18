@@ -1,8 +1,11 @@
 <h1>マイページ</h1>
+名前
 <%= @user.name %>
-<%= image_tag @user.image.to_s %>
+<%= image_tag @user.image.to_s, size:"100x100" %>
+紹介文
+<%= @user.introduction %>
+性別
 <%= @user.sex %>
-<%= @user.age %>
 <% if @user = current_user %>
   <%= link_to "編集する", edit_user_path %>
 <% end %>
@@ -20,11 +23,12 @@
   <%= bulletin_board.title %>
 <% end %>
 
-  <% if current_user.following?(user) %>
-    <%= link_to "フォロー外す", user_relationships_path(user.id), method: :delete %>
+  <% if current_user.following?(@user) %>
+    <%= link_to "フォロー外す", relationships_path(@user.id), method: :delete %>
   <% else %>
-    <%= link_to "フォローする", user_relationships_path(user.id), method: :post %>
+    <%= link_to "フォローする", relationships_path(@user.id), method: :post %>
   <% end %>
-  
+フォロー数
 <%= @user.followings.count %>
+フォロワー数
 <%= @user.followers.count %>
