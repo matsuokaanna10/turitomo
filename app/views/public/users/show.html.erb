@@ -12,9 +12,9 @@
 
 投稿一覧
 <% @bulletin_boards.each do |bulletin_board| %>
-  <%= image_tag bulletin_board.user.image.to_s %>
-  <%= bulletin_board.title %>
+  <%= link_to bulletin_board.title, bulletin_board_path(bulletin_board.id) %>
   <%= bulletin_board.content %>
+  <%= link_to "削除", bulletin_board_path(bulletin_board), method: :delete %>
 <% end %>
 
 いいね一覧

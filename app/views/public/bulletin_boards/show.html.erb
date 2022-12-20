@@ -1,13 +1,13 @@
 <%= @bulletin_board.title %>
 <%= @bulletin_board.content %>
 
-<% if @bulletin_board = current.bulletin_board %>
+<% if @bulletin_board = current_user.id %>
   <%= link_to "編集する", edit_bulletin_board_path(@bulletin_board) %>
   <%= link_to "削除", bulletin_board_path(@bulletin_board), method: :delete %>
 <% end %>
 
-<% @comment.each do |comment| %>
-  <%= image_tag comment.user.image.to_s %>
+<% @comments.each do |comment| %>
+  <%= image_tag comment.user.image.to_s, size:"100x100"  %>
   <%= comment.sentence %>
 <% end %>
 
@@ -17,6 +17,7 @@
   <%= button_to 'いいね', bulletin_board_likes_path(@bulletin_board) %>
 <% end %>
 
+likeのshowに↓
 <% @bulletin_board.liked_users.each do |user| %>
   <%= user.name %>
 <% end %>
