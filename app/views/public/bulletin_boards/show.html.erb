@@ -1,7 +1,7 @@
 <%= @bulletin_board.title %>
 <%= @bulletin_board.content %>
 
-<% if @bulletin_board = current_user.id %>
+<% if @bulletin_board.user_id == current_user.id %>
   <%= link_to "編集する", edit_bulletin_board_path(@bulletin_board) %>
   <%= link_to "削除", bulletin_board_path(@bulletin_board), method: :delete %>
 <% end %>
@@ -22,4 +22,8 @@ likeのshowに↓
   <%= user.name %>
 <% end %>
 
-<%= link_to "コメントする", new_comment_path %>
+<%= form_with model: @comment, url:comments_path, method: :post, local:true do |f| %>
+  <%= f.hidden_field :bulletin_board_id, value: @bulletin_board.id %>
+  <%= f.text_area :sentence %>
+  <%= f.submit 'コメントする' %>
+<% end %>

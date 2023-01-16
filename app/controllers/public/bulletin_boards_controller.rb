@@ -11,12 +11,13 @@ class Public::BulletinBoardsController < ApplicationController
   def show
     @bulletin_board = BulletinBoard.find(params[:id])
     @like = Like.new
+    @comment = Comment.new
     @comments = @bulletin_board.comments
   end
 
   def create
     bulletin_board = BulletinBoard.new(bulletin_board_params)
-    bulletin_board.save
+    bulletin_board.save!
     redirect_to user_path(current_user.id)
   end
 
@@ -38,6 +39,6 @@ class Public::BulletinBoardsController < ApplicationController
 
   private
     def bulletin_board_params
-      params.require(:bulletin_board).permit(:title, :content).merge(user_id: current_user.id)
+      params.require(:bulletin_board).permit(:title, :content, tag_ids: []).merge(user_id: current_user.id)
     end
 end

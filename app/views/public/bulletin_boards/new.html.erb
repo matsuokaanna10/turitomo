@@ -4,5 +4,11 @@
   <%= f.text_field :title %>
   内容
   <%= f.text_area :content %>
+  <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag| %>
+    <%= tag.label class: 'form-check-label' do %>
+      <%= tag.check_box class: 'form-check-input' %>
+      <%= tag.text %>
+    <% end %>
+  <% end %>
   <%= f.submit '掲示板を作成する' %>
 <% end %>
