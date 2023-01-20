@@ -17,11 +17,7 @@
   <%= link_to "削除", bulletin_board_path(bulletin_board), method: :delete %>
 <% end %>
 
-いいね一覧
-<% @user.liked_bulletin_boards.each do |bulletin_board| %>
-  <%= image_tag bulletin_board.user.image.to_s %>
-  <%= bulletin_board.title %>
-<% end %>
+<%= link_to "いいね", bulletin_board_like_path(@user.id) %>
 
   <% if current_user.following?(@user) %>
     <%= link_to "フォロー外す", relationships_path(@user.id), method: :delete %>
@@ -32,3 +28,7 @@
 <%= @user.followings.count %>
 フォロワー数
 <%= @user.followers.count %>
+
+<%= link_to "退会する", unsubscribe_user_path, class: "btn btn-danger" %>
+
+

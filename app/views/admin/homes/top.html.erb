@@ -1,4 +1,4 @@
-検索
+投稿一覧
 <%= form_tag(bulletin_boards_path,:method => 'get') do %>
   <%= text_field_tag :search %>
   <%= submit_tag 'Search', :title => nil %>
@@ -14,8 +14,8 @@
     <%= select_tag :tag_id, options_from_collection_for_select(Tag.all, :id, :name, params[:tag_id]),
       { prompt: 'タグで絞り込み検索',　onchange: 'submit(this.form);' } %>
  <% end %>
-
-<% @bulletin_boards.each do |bulletin_board| %>
+ 
+<% @bulletin_board.each do |bulletin_board| %>
   <%= link_to bulletin_board.title, bulletin_board_path(bulletin_board.id) %>
   <%= bulletin_board.content %>
   <%= bulletin_board.likes.count %>
@@ -23,5 +23,3 @@
     <%= tag.name %>
   <% end %>
 <% end %>
-
-<%= link_to "掲示板作成する", new_bulletin_board_path %>

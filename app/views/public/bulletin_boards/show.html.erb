@@ -17,11 +17,6 @@
   <%= button_to 'いいね', bulletin_board_likes_path(@bulletin_board) %>
 <% end %>
 
-likeのshowに↓
-<% @bulletin_board.liked_users.each do |user| %>
-  <%= user.name %>
-<% end %>
-
 <%= form_with model: @comment, url:comments_path, method: :post, local:true do |f| %>
   <%= f.hidden_field :bulletin_board_id, value: @bulletin_board.id %>
   <%= f.text_area :sentence %>

@@ -13,10 +13,12 @@ Rails.application.routes.draw do
   end
 
   scope module: :public do
-    root to: 'homes#top'
+   root to: 'homes#top'
+   patch 'users/withdraw', to: 'users#withdraw', as: 'withdraw_user'
+   get 'users/unsubscribe', to: 'users#unsubscribe', as: 'unsubscribe_user'
    resources :users, only: [:show, :edit, :update]
    resources :bulletin_boards, only: [:new, :index, :show, :create, :edit, :update, :destroy] do
-     resources :likes, only: [:create, :destroy]
+     resources :likes, only: [:show, :create, :destroy]
    end
    resources :comments, only: [:create]
    resources :recruitments, only: [:new, :show, :edit, :create, :update]
@@ -26,5 +28,8 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
+    get 'top' => 'homes#top'
+    resources :bulletin_boards, only: [:show, :destroy]
+    resources :users, only: [:index, :show, :update]
   end
 end

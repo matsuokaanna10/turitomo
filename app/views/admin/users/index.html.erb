@@ -1,0 +1,9 @@
+<% @users.each do |users| %>
+  <%= link_to users.name, admin_user_path(users.id) %>
+  <%= users.email %>
+  <% if users.is_deleted == false %>
+    有効
+  <% else %>
+    退会
+  <% end %>
+<% end %>

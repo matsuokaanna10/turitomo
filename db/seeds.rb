@@ -14,3 +14,8 @@ Tag.create([
   { name: '経験者歓迎' },
   { name: 'ベテラン歓迎' },
 ])
+
+Admin.create!(
+    email: "a@a",
+    password: "aaaaaa"
+)

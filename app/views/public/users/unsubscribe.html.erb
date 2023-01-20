@@ -1,0 +1,7 @@
+本当に退会しますか？
+
+<%= link_to "退会しない", user_path(@user), class: "btn btn-primary" %>
+<%= form_with model: @user, url:withdraw_user_path, method: :patch, local:true do |user| %>
+  <%= user.hidden_field :is_deleted, value: true %>
+  <%= user.submit '退会する', class: "btn btn-danger" %>
+<%end %>

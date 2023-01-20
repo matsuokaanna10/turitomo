@@ -4,7 +4,17 @@ class Public::BulletinBoardsController < ApplicationController
   end
 
   def index
-    @bulletin_boards = BulletinBoard.all
+    if params[:search]
+      @bulletin_boards = BulletinBoard.search(params[:search])
+    elsif params[:tag_id]
+      @bulletin_boards = params[:tag_id].present? ? Tag.find(params[:tag_id]).bulletin_boards : BulletinBoard.all
+    elsif params[:order] && params[:order] == 'oldbulletin_board'
+        @bulletin_boards = BulletinBoard.all.order(id: "ASC")
+    elsif params[:order] && params[:order] == 'newbulletin_board'
+        @bulletin_boards = BulletinBoard.all.order(id: "DESC")
+    else
+      @bulletin_boards = BulletinBoard.all
+    end
     @comments = Comment.all
   end
 
@@ -17,7 +27,7 @@ class Public::BulletinBoardsController < ApplicationController
 
   def create
     bulletin_board = BulletinBoard.new(bulletin_board_params)
-    bulletin_board.save!
+    bulletin_board.save
     redirect_to user_path(current_user.id)
   end
 

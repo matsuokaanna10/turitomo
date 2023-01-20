@@ -14,6 +14,15 @@
     <% if user_signed_in? %>
       <%= link_to "マイページ", user_path(current_user.id) %>
       <%= link_to "掲示板一覧", bulletin_boards_path %>
+      <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+    <% elsif admin_signed_in? %>
+      <%= link_to "ユーザー一覧", admin_users_path %>
+      <%= link_to "投稿一覧", admin_top_path %>
+      <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
+    <% else %>
+      <%= link_to "トップ", root_path %>
+      <%= link_to "ログイン", new_user_session_path %>
+      <%= link_to "新規登録", new_user_registration_path %>
     <% end %>
     <%= yield %>
   </body>
