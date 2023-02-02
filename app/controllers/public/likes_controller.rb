@@ -1,13 +1,15 @@
 class Public::LikesController < ApplicationController
-  def show
-    likes = Like.where(user_id: @user.id).pluck(:bulletin_board_id)
-    @like_bulletin_boards = BulletinBoard.find(likes)
+  def index
+    @user = User.find(params[:user_id])
+
   end
 
   def create
     @like = current_user.likes.create(bulletin_board_id: params[:bulletin_board_id])
-    @like.save
     redirect_back(fallback_location: bulletin_boards_path)
+    bulletin_board = BulletinBoard.find(params[:bulletin_board_id])
+    bulletin_board.create_notification_like!(current_user)
+    #respond_to :js
   end
 
   def destroy

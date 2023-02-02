@@ -1,3 +1,7 @@
+<% if @bulletin_board.errors.any? %>
+  <%= @bulletin_board.errors.count %>件のエラーが発生しました
+<% end %>
+
 掲示板作成
 <%= form_with model:@bulletin_board, local:true do |f| %>
   タイトル

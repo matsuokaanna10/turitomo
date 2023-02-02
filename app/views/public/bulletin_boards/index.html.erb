@@ -6,13 +6,13 @@
 
 並び替え
 <%= form_tag(bulletin_boards_path,:method => 'get') do %>
-   <%= select_tag("order", options_for_select([['最新の投稿', 'newbulletin_board'], ['古い投稿', 'oldbulletin_board']])) %>
-   <%= submit_tag '並べ替える'  %>
+   <%= select_tag("order", options_for_select([['最新の投稿', 'newbulletin_board'], ['古い投稿', 'oldbulletin_board']], selected: params[:order]), 
+   {prompt: '並び替えで絞り込み検索', onchange:'submit(this.form);'}) %>
 <% end %>
 
  <%= form_tag bulletin_boards_path, method: :get, class: 'boards__searchForm' do %>
     <%= select_tag :tag_id, options_from_collection_for_select(Tag.all, :id, :name, params[:tag_id]),
-      { prompt: 'タグで絞り込み検索',　onchange: 'submit(this.form);' } %>
+      { prompt: 'タグで絞り込み検索', onchange: 'submit(this.form);' } %>
  <% end %>
 
 <% @bulletin_boards.each do |bulletin_board| %>

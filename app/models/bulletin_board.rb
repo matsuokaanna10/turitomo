@@ -8,6 +8,9 @@ class BulletinBoard < ApplicationRecord
   has_many :tag_relations, dependent: :destroy
   has_many :tags, through: :tag_relations
 
+  validates :title, presence: true
+  validates :content, presence: true
+
   def self.search(search)
     if search
       BulletinBoard.where(['content LIKE ?', "%#{search}%"])
@@ -20,7 +23,7 @@ class BulletinBoard < ApplicationRecord
     temp = Notification.where(["visitor_id = ? and visited_id = ? and bulletin_board_id = ? and action = ? ", current_user.id, user_id, id, 'like'])
     if temp.blank?
       notification = current_user.active_notifications.new(
-        post_id: id,
+        bulletin_board_id: id,
         visited_id: user_id,
         action: 'like'
       )

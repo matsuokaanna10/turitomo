@@ -1,4 +1,4 @@
 <% @user.liked_bulletin_boards.each do |bulletin_board| %>
-  <%= image_tag bulletin_board.user.image.to_s %>
+  <%= image_tag bulletin_board.user.image.to_s, size:"100x100" %>
   <%= bulletin_board.title %>
 <% end %>

@@ -24,6 +24,14 @@ class Public::SessionsController < Devise::SessionsController
     redirect_to bulletin_boards_path, notice: 'ゲストユーザーとしてログインしました。'
   end
 
+  protected
+    def user_state
+      @user = User.find_by(email: params[:user][:email])
+      return if !@user
+      if @user.valid_password?(params[:user][:password]) && @user.is_deleted == true
+      redirect_to new_user_registration_path
+      end
+    end
   # protected
 
   # If you have extra params to permit, append them to the sanitizer.

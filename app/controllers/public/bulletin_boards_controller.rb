@@ -26,9 +26,12 @@ class Public::BulletinBoardsController < ApplicationController
   end
 
   def create
-    bulletin_board = BulletinBoard.new(bulletin_board_params)
-    bulletin_board.save
-    redirect_to user_path(current_user.id)
+    @bulletin_board = BulletinBoard.new(bulletin_board_params)
+    if @bulletin_board.save
+      redirect_to user_path(current_user.id)
+    else
+      render :new
+    end
   end
 
   def edit

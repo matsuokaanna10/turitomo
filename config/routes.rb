@@ -16,15 +16,17 @@ Rails.application.routes.draw do
    root to: 'homes#top'
    patch 'users/withdraw', to: 'users#withdraw', as: 'withdraw_user'
    get 'users/unsubscribe', to: 'users#unsubscribe', as: 'unsubscribe_user'
-   resources :users, only: [:show, :edit, :update]
+   resources :users, only: [:show, :edit, :update] do
+    resource :relationships, only: [:create, :destroy]
+    get 'followings' => 'relationships#followings', as: 'followings'
+    get 'followers' => 'relationships#followers', as: 'followers'
+   end
    resources :bulletin_boards, only: [:new, :index, :show, :create, :edit, :update, :destroy] do
-     resources :likes, only: [:show, :create, :destroy]
+     resources :likes, only: [:index, :create, :destroy]
    end
    resources :comments, only: [:create]
    resources :recruitments, only: [:new, :show, :edit, :create, :update]
-   resources :relationships, only: [:create, :destroy]
-   get 'followings' => 'relationships#followings', as: 'followings'
-   get 'followers' => 'relationships#followers', as: 'followers'
+   resources :notifications, only: [:index]
   end
 
   namespace :admin do
