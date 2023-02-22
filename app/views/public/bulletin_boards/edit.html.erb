@@ -1,8 +1,25 @@
+<p id="notice">
+<div class="container-md">
+    <div class="row">
+      <div class="col-md-12">
 変更
+
 <%= form_with model:@bulletin_board, local:true do |f| %>
-  タイトル
-  <%= f.text_field :title %>
-  内容
-  <%= f.text_area :content %>
-  <%= f.submit '変更する' %>
+<table>
+  <tr>
+    <th><%= f.label :"タイトル" %></th>
+    <td><%= f.text_field :title %></td>
+  </tr>
+  <tr>
+    <th><%= f.label :"概要" %></th>
+    <td><%= f.text_field :content %></td>
+  </tr>
+  <tr>
+    <th></th>
+    <td><%= f.submit '変更する' %></td>
+  </tr>
+  </table>
 <% end %>
+</div>
+</div>
+</div>

@@ -1,4 +1,7 @@
-検索
+<p id="notice">
+<div class="container-md">
+  <div class="row">
+    <div class="col-lg-12">
 <%= form_tag(bulletin_boards_path,:method => 'get') do %>
   <%= text_field_tag :search %>
   <%= submit_tag 'Search', :title => nil %>
@@ -14,14 +17,24 @@
     <%= select_tag :tag_id, options_from_collection_for_select(Tag.all, :id, :name, params[:tag_id]),
       { prompt: 'タグで絞り込み検索', onchange: 'submit(this.form);' } %>
  <% end %>
-
+</div>
+<div class="col-lg-11">
 <% @bulletin_boards.each do |bulletin_board| %>
+<div class="card">
+  <div class="card-body">
+<%= image_tag bulletin_board.user.image.to_s, size:"100x100" %>
   <%= link_to bulletin_board.title, bulletin_board_path(bulletin_board.id) %>
   <%= bulletin_board.content %>
   <%= bulletin_board.likes.count %>
   <% bulletin_board.tags.each do |tag| %>
     <%= tag.name %>
   <% end %>
+  </div>
+</div>
 <% end %>
-
-<%= link_to "掲示板作成する", new_bulletin_board_path %>
+</div>
+<div class="col-lg-1">
+<%= link_to "+", new_bulletin_board_path, class: "btn btn-light rounded-circle p-0", style: "width:2rem;height:2rem;" %>
+</div>
+</div>
+</div>

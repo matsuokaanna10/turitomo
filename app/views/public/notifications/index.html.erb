@@ -1,19 +1,29 @@
+<p id="notice">
+<div class="container-md">
+  <div class="row">
 <% notifications = @notifications.where.not(visitor_id: current_user.id) %>
 <% if notifications.exists? %>
-  <% visitor = notification.visitor %>
-  <% visited = notification.visited %>
-
-  <%= link_to user_path(visitor) do %>
-    <%= image_tag avatar_url(visitor).to_s, class: "icon_mini" %>
-    <%= visitor.name %>さんが
+  <% @notifications.each do |notification| %>
+   <div class="col-lg-12">
+    <% @visitor = notification.visitor %>
+    <% @visited = notification.visited %>
+  <%= link_to user_path(@visitor) do %>
+ 
+    <%= image_tag @visitor.image.to_s, style: "border-radius: 50%; width: 80px; height: 80px; object-fit:cover;" %>
+    <%= @visitor.name %>さんが
     <% case notification.action %>
       <% when 'follow' then %>
         <%= "あなたをフォローしました" %>
       <% when 'like' then %>
         <%= link_to 'あなたの投稿', notification.bulletin_board, style: "font-weight: bold;" %>
         <%= "にいいねしました" %>
-            通知はありません
     <% end %>
   <% end %>
+  <% end %>
+<% else %>
+  通知はありません
+  </div>
 <% end %>
 
+</div>
+</div>

@@ -1,18 +1,38 @@
 <% if @bulletin_board.errors.any? %>
   <%= @bulletin_board.errors.count %>件のエラーが発生しました
 <% end %>
-
+<p id="notice">
+<div class="container-md">
+    <div class="row">
+      <div class="col-md-12">
 掲示板作成
 <%= form_with model:@bulletin_board, local:true do |f| %>
-  タイトル
-  <%= f.text_field :title %>
-  内容
-  <%= f.text_area :content %>
+<table>
+  <tr>
+    <th><%= f.label :"タイトル" %></th>
+    <td><%= f.text_field :title %></td>
+  </tr>
+  <tr>
+    <th><%= f.label :"概要" %></th>
+    <td><%= f.text_area :content %></td>
+  </tr>
+  
   <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag| %>
-    <%= tag.label class: 'form-check-label' do %>
+    <tr>
+      <th>
+      <%= tag.label class: 'form-check-label' do %>
       <%= tag.check_box class: 'form-check-input' %>
       <%= tag.text %>
-    <% end %>
+      <% end %>
+      </th>
+    </tr>
   <% end %>
-  <%= f.submit '掲示板を作成する' %>
+  <tr>
+    <th></th>
+    <td><%= f.submit '掲示板を作成する' %></td>
+  </tr>
+  </table>
 <% end %>
+</div>
+</div>
+</div>

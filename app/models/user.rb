@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   mount_uploader :image, ImagesUploader
-  enum sex: { man: 0, woman: 1}
+  enum sex: { man: 0, woman: 1 }
   def self.guest
     find_or_create_by!(email: 'guest@example.com') do |user|
       user.password = SecureRandom.urlsafe_base64
@@ -50,4 +50,6 @@ class User < ApplicationRecord
       notification.save if notification.valid?
     end
   end
+  
+  
 end

@@ -9,7 +9,6 @@ class Public::LikesController < ApplicationController
     redirect_back(fallback_location: bulletin_boards_path)
     bulletin_board = BulletinBoard.find(params[:bulletin_board_id])
     bulletin_board.create_notification_like!(current_user)
-    #respond_to :js
   end
 
   def destroy

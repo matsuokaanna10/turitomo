@@ -1,7 +1,11 @@
 <% if @comment.errors.any? %>
   文章か画像を投稿してください
 <% end %>
-
+<p id="notice">
+<div class="container-md">
+  <div class="row">
+    <div class="col-lg-12">
+<%= image_tag @bulletin_board.user.image.to_s, style: "border-radius: 50%; width: 100px; height: 100px; object-fit:cover;" %>
 <%= link_to @bulletin_board.user.name, user_path(@bulletin_board.user_id) %>
 <%= @bulletin_board.title %>
 <%= @bulletin_board.content %>
@@ -11,19 +15,28 @@
   <%= link_to "削除", bulletin_board_path(@bulletin_board), method: :delete %>
 <% end %>
 
-<% @comments.each do |comment| %>
-  <%= image_tag comment.user.image.to_s, size:"100x100"  %>
-  <%= comment.sentence %>
-<% end %>
-
 <% if current_user.already_liked?(@bulletin_board) %>
   <%= button_to 'いいねを取り消す', bulletin_board_like_path(@bulletin_board), method: :delete %>
 <% else %>
   <%= button_to 'いいね', bulletin_board_likes_path(@bulletin_board) %>
 <% end %>
-
+</div>
+<div class="col-lg-12">
+  <div class="card">
+    <div class="card-body">
+<% @comments.each do |comment| %>
+<p><%= image_tag comment.user.image.to_s, style: "border-radius: 50%; width: 50px; height: 50px; object-fit:cover;"  %>
+<%= comment.sentence %>
+</p>
+<% end %>
+</div>
+</div>
 <%= form_with model: @comment, url:comments_path, method: :post, local:true do |f| %>
   <%= f.hidden_field :bulletin_board_id, value: @bulletin_board.id %>
   <%= f.text_area :sentence %>
   <%= f.submit 'コメントする' %>
 <% end %>
+
+</div>
+</div>
+</div>

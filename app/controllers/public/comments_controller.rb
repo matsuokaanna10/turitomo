@@ -4,7 +4,7 @@ class Public::CommentsController < ApplicationController
     if @comment.save
       redirect_to bulletin_boards_path
     else
-      render :new
+      render 'bulletin_board/show'
     end
   end
 

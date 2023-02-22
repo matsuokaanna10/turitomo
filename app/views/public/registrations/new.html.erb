@@ -1,42 +1,51 @@
-<h2>Sign up</h2>
-
+<div class="container">
+  <div class="row">
+    <div class="offset-md-1 col-md-11">
+      <h2>新規登録</h2>
+    </div>
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "public/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <div class="col-md-12">
+      <table>
+        <tr>
+          <th><%= f.label :"メールアドレス" %></th>
+          <td><%= f.email_field :email, autofocus: true, autocomplete: "email" %></td>
+        </tr>
+        <tr>
+         <th>
+            <%= f.label :"パスワード(6文字以上)" %>
+            <% if @minimum_password_length %>
+            <% end %>
+          </th>
+          <td><%= f.password_field :password, autocomplete: "new-password" %></td>
+        </tr>
+        <tr>
+          <th><%= f.label :"パスワード(確認用)" %></th>
+          <td><%= f.password_field :password_confirmation, autocomplete: "new-password" %></td>
+        </tr>
+        <tr>
+          <th><%= f.label :"名前" %></th>
+          <td><%= f.text_field :name, autofocus: true %></td>
+        </tr>
+        <tr>
+          <th><%= f.label :"性別" %></th>
+          <td><%= f.label :"男性"  %>
+              <%= f.radio_button :sex, :man %>
+              <%= f.label :"女性"  %>
+              <%= f.radio_button :sex, :woman %>
+          </td>
+        </tr>
+        <tr>
+          <th></th>
+          <td><%= f.submit "新規登録" %></td>
+        </tr>
+      </table>
+      <% end %>
+      </div>
+  <div class="offset-md-1"></div>
+  <div class="col-md-8 offset-md-3">
+  <h4>既に登録済みの方</h4>
+  <p><%= render "public/shared/links" %></p>
   </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
   </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true %>
-  </div>
-
-  <div class="sex-field">
-    <%= f.label :Sex %><br />
-    <%= f.label :man  %>
-    <%= f.radio_button :sex, :man %>
-    <%= f.label :woman  %>
-    <%= f.radio_button :sex, :woman %>
-　</div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "public/shared/links" %>
+</div>

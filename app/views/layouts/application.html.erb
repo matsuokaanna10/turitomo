@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<html lang="ja">
+ <head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <title>ABCD DEMO</title>
+   <link rel="stylesheet" href="./css/reset.css">
+   <link rel="stylesheet" href="./css/style.css">
+   <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,700,900&display=swap" rel="stylesheet">
     <title>Turitomo</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
@@ -10,20 +17,34 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+   <body class="d-flex flex-column vh-100">
+     <header>
+      <nav class ="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+          <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+               <span class="navbar-toggler-icon"></span>
+      </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav ml-auto">
     <% if user_signed_in? %>
-      <%= link_to "マイページ", user_path(current_user.id) %>
-      <%= link_to "掲示板一覧", bulletin_boards_path %>
-      <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+      <%= link_to "マイページ　", user_path(current_user.id), class: "fas fa-user nav-link text-light" %>
+      <%= link_to "掲示板一覧　", bulletin_boards_path, class: "fas fa-house nav-link text-light" %>
+      <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "fas fa-sign-out-alt nav-link text-light" %>
     <% elsif admin_signed_in? %>
       <%= link_to "ユーザー一覧", admin_users_path %>
       <%= link_to "投稿一覧", admin_top_path %>
-      <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
+      <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "fas fa-sign-out-alt nav-link text-light" %>
     <% else %>
       <%= link_to "トップ", root_path %>
-      <%= link_to "ログイン", new_user_session_path %>
+      <%= link_to "ログイン", new_user_session_path, class: "fas fa-sign-in-alt nav-link text-light" %>
       <%= link_to "新規登録", new_user_registration_path %>
     <% end %>
+    </ul>
+        </div>
+      </div>
+      </nav>
+    </header>
     <%= yield %>
+    <script src="https://kit.fontawesome.com/9df6885bae.js" crossorigin="anonymous"></script>
   </body>
 </html>
